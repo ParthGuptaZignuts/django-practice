@@ -1,7 +1,16 @@
 from django.http import HttpResponse
+from django.shortcuts import render
+def home(request):
+    data ={
+        "list" : ["HTML" ,"CSS" ,"JS" , "GIT AND GITHUB" ,"PHP" ,"PYTHON"]
+    }
+    return render(request,"index.html",data)
 
 def aboutUs(request):
-    return HttpResponse("This is the about us page!")
+    data = {
+        "title":"About Us Page",
+    }
+    return  render(request,"index.html",data)
 
 def contactUs(request):
     return HttpResponse("This is the contact us page!")
