@@ -1,16 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HTML 5 Boilerplate</title>
+    <title>{{ title }}</title>
     <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-	<h1>{{title}}</h1>
-    {%for i in list %}
-    <p>{{i}}</p>
-    {% endfor %}
-  </body>
+</head>
+<body>
+    <h1>{{ title }}</h1>
+
+    {% if list %}
+        {% for i in list %}
+            <p>{{ i }}</p>
+        {% endfor %}
+    {% else %}
+        <p>No items in the list.</p>
+    {% endif %}
+
+    {% if items %}
+        {% for item in items %}
+            {% if item < 10 %}
+                <p>Item: {{ item }} is less than 10</p>
+            {% elif item == 10 %}
+                <p>Item: {{ item }} is exactly 10</p>
+            {% else %}
+                <p>Item: {{ item }} is greater than 10</p>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <p>No items to display.</p>
+    {% endif %}
+</body>
 </html>
