@@ -1,5 +1,6 @@
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render
+from .forms import NumberForm
 
 def home(request):
     data = {
@@ -27,7 +28,6 @@ def contactUs(request):
 def course(request, course_id):
     return HttpResponse(f"{course_id}: This is the course page!")
 
-
 def formPostMethod(request):
     if request.method == 'POST':
         user_email = request.POST.get('UserEmail')
@@ -35,7 +35,22 @@ def formPostMethod(request):
         
         if user_email and user_password:
             print(f"Email: {user_email}, Password: {user_password}")
-            return HttpResponse("Form submitted successfully!")
+            return HttpResponseRedirect("/")
 
    
     return render(request, "formPostMethod.html")
+
+def oddOrEven(request):
+    result = None
+    if request.method == 'POST':
+        form = NumberForm(request.POST)
+        if form.is_valid():
+            number = form.cleaned_data['num']
+            if number % 2 == 0:
+                result = f"{number} is even."
+            else:
+                result = f"{number} is odd."
+    else:
+        form = NumberForm()
+
+    return render(request, 'oddOrEven.html', {'form': form, 'result': result})

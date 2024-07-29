@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from learningDjango.views import aboutUs, contactUs, course, home ,formPostMethod
+from learningDjango.views import aboutUs, contactUs, course, home ,formPostMethod,oddOrEven
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,5 +24,6 @@ urlpatterns = [
     path('about-us/', aboutUs, name='about_us'),
     path('contact-us/', contactUs, name='contact_us'),
     path('course/<int:course_id>/', course, name='course'),
-    path('formPostMethod/',formPostMethod, name='formPostMethod')
+    path('formPostMethod/',formPostMethod, name='formPostMethod'),
+    path('oddOrEven', oddOrEven , name="oddOrEven")
 ]
