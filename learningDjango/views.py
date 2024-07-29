@@ -26,3 +26,16 @@ def contactUs(request):
 
 def course(request, course_id):
     return HttpResponse(f"{course_id}: This is the course page!")
+
+
+def formPostMethod(request):
+    if request.method == 'POST':
+        user_email = request.POST.get('UserEmail')
+        user_password = request.POST.get('UserPassword')
+        
+        if user_email and user_password:
+            print(f"Email: {user_email}, Password: {user_password}")
+            return HttpResponse("Form submitted successfully!")
+
+   
+    return render(request, "formPostMethod.html")
