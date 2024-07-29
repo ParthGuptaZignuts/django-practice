@@ -15,11 +15,14 @@ def aboutUs(request):
     return render(request, "index.html", data)
 
 def contactUs(request):
-    data = {
-        "title": "Contact Us Page",
-        "items": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    }
-    return render(request, "index.html", data)
+    if request.method == 'GET':
+        user_email = request.GET.get('UserEmail')
+        user_password = request.GET.get('UserPassword')
+        if user_email and user_password:
+            print(f"Email: {user_email}, Password: {user_password}")
+            return HttpResponse("Form submitted successfully!")
+
+    return render(request, "Contact.html")
 
 def course(request, course_id):
     return HttpResponse(f"{course_id}: This is the course page!")
