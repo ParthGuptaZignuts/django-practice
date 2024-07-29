@@ -1,11 +1,14 @@
 from django.http import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render
 from .forms import NumberForm
+from services.models import Service
 
 def home(request):
+    serviceData = Service.objects.all()
     data = {
         "title": "Home Page",
-        "list": ["HTML", "CSS", "JS", "GIT AND GITHUB", "PHP", "PYTHON"]
+        "list": ["HTML", "CSS", "JS", "GIT AND GITHUB", "PHP", "PYTHON"],
+        "serviceData" : serviceData
     }
     return render(request, "SecondFile.html", data)
 
