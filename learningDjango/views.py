@@ -2,17 +2,30 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render
 from .forms import NumberForm
 from services.models import Service
+from news.models import News
 
 def home(request):
     # used trim syntax of list but here make sure that negative index doesn't work 
     serviceData = Service.objects.all().order_by('id')[:3]
+    newsData = News.objects.all().order_by('-id')
     data = {
         "title": "Home Page",
         "list": ["HTML", "CSS", "JS", "GIT AND GITHUB", "PHP", "PYTHON"],
-        "serviceData" : serviceData
+        "serviceData" : serviceData,
+        "newsData" : newsData
     }
     return render(request, "SecondFile.html", data)
 
+def newsDetailsId(request , id):
+    newsData = News.objects.filter(id=id).first()
+    if newsData:
+        data = {
+            "news_title": newsData.news_title,
+            "news_description": newsData.news_description,
+        }
+        return render(request, "NewsDetails.html", data)
+    else:
+        return HttpResponse("News not found!")
 def aboutUs(request):
     data = {
         "title": "About Us Page",

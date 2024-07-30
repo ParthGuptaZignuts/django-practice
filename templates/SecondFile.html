@@ -2,6 +2,11 @@
 
 {% block content %}
 <body>
+  <marquee onmouseover="stop()" onmouseout="start()">
+    {% for news in newsData %}
+  <a href="newsDetails/{{news.id}}"><h2>{{news.news_title}}</h2></a>
+{% endfor%}
+  </marquee>
   <h1>I am a headline made with HTML</h1>
 <p>And I am a simple text paragraph. The color of this text is styled with CSS. Click the button below to remove me through the power JavaScript.</p>
 <button>Hide the text above</button>
