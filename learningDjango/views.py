@@ -4,7 +4,8 @@ from .forms import NumberForm
 from services.models import Service
 
 def home(request):
-    serviceData = Service.objects.all().order_by('id')
+    # used trim syntax of list but here make sure that negative index doesn't work 
+    serviceData = Service.objects.all().order_by('id')[:3]
     data = {
         "title": "Home Page",
         "list": ["HTML", "CSS", "JS", "GIT AND GITHUB", "PHP", "PYTHON"],
