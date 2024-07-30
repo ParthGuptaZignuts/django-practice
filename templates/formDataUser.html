@@ -1,0 +1,25 @@
+{% extends "Base.html" %}
+
+{% block content %}
+<body>
+  <div class="container mt-4">
+    <h1>Add a New Service</h1>
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="serviceIcon">Service Icon</label>
+        <input type="text" class="form-control" id="serviceIcon" name="service_icon" placeholder="Enter service icon">
+      </div>
+      <div class="form-group">
+        <label for="serviceTitle">Service Title</label>
+        <input type="text" class="form-control" id="serviceTitle" name="service_title" placeholder="Enter service title">
+      </div>
+      <div class="form-group">
+        <label for="serviceDescription">Service Description</label>
+        <textarea class="form-control" id="serviceDescription" name="service_description" rows="3" placeholder="Enter service description"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</body>
+{% endblock content %}
