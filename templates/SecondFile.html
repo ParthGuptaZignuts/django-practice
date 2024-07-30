@@ -3,19 +3,56 @@
 {% block content %}
 <body>
   <marquee onmouseover="stop()" onmouseout="start()">
-    {% for news in newsData %}
-  <a href="newsDetails/{{news.id}}"><h2>{{news.news_title}}</h2></a>
-{% endfor%}
+    {% for news in news_page_obj %}
+        <a href="newsDetails/{{ news.id }}"><h2>{{ news.news_title }}</h2></a>
+    {% endfor %}
   </marquee>
+
+  <div class="pagination">
+    <span class="step-links">
+        {% if news_page_obj.has_previous %}
+            <a href="?news_page=1">&laquo; first</a>
+            <a href="?news_page={{ news_page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ news_page_obj.number }} of {{ news_page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if news_page_obj.has_next %}
+            <a href="?news_page={{ news_page_obj.next_page_number }}">next</a>
+            <a href="?news_page={{ news_page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+  </div>
+
   <h1>I am a headline made with HTML</h1>
-<p>And I am a simple text paragraph. The color of this text is styled with CSS. Click the button below to remove me through the power JavaScript.</p>
-<button>Hide the text above</button>
-{% for a in servicesData %}
-  <h2>{{a.service_title}}</h2>
-  <p>{{a.service_description | safe | upper}}</p>
-{% endfor%}
+  <p>And I am a simple text paragraph. The color of this text is styled with CSS. Click the button below to remove me through the power of JavaScript.</p>
+  <button>Hide the text above</button>
+
+  {% for a in service_page_obj %}
+    <h2>{{ a.service_title }}</h2>
+    <p>{{ a.service_description|safe|upper }}</p>
+  {% endfor %}
+
+  <div class="pagination">
+    <span class="step-links">
+        {% if service_page_obj.has_previous %}
+            <a href="?service_page=1">&laquo; first</a>
+            <a href="?service_page={{ service_page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ service_page_obj.number }} of {{ service_page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if service_page_obj.has_next %}
+            <a href="?service_page={{ service_page_obj.next_page_number }}">next</a>
+            <a href="?service_page={{ service_page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+  </div>
 
 </body>
 </html>
-
 {% endblock content %}

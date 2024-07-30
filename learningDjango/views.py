@@ -1,18 +1,25 @@
-from django.http import HttpResponse,HttpResponseRedirect
+from django.core.paginator import Paginator
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from .forms import NumberForm
 from services.models import Service
 from news.models import News
 
 def home(request):
-    # used trim syntax of list but here make sure that negative index doesn't work 
-    serviceData = Service.objects.all().order_by('id')[:3]
-    newsData = News.objects.all().order_by('-id')
+    service_list = Service.objects.all().order_by('id')
+    news_list = News.objects.all().order_by('-id')
+    service_paginator = Paginator(service_list, 1) 
+    news_paginator = Paginator(news_list, 5)  
+    service_page_number = request.GET.get('service_page')
+    news_page_number = request.GET.get('news_page')
+    service_page_obj = service_paginator.get_page(service_page_number)
+    news_page_obj = news_paginator.get_page(news_page_number)
+
     data = {
         "title": "Home Page",
         "list": ["HTML", "CSS", "JS", "GIT AND GITHUB", "PHP", "PYTHON"],
-        "serviceData" : serviceData,
-        "newsData" : newsData
+        "service_page_obj": service_page_obj,
+        "news_page_obj": news_page_obj,
     }
     return render(request, "SecondFile.html", data)
 
