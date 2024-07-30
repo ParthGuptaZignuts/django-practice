@@ -7,7 +7,7 @@
 <button>Hide the text above</button>
 {% for a in servicesData %}
   <h2>{{a.service_title}}</h2>
-  <p>{{a.service_description}}</p>
+  <p>{{a.service_description | safe | upper}}</p>
 {% endfor%}
 
 </body>
