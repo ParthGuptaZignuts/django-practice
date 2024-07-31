@@ -84,5 +84,14 @@ def formDataUser(request):
         icon = request.POST.get('service_icon')
         title = request.POST.get('service_title')
         description = request.POST.get('service_description')
-        Service.objects.create(service_icon=icon, service_title=title, service_description=description)
+
+        Service.objects.create(
+            service_icon=icon,
+            service_title=title,
+            service_description=description
+        )
+
+        return render(request,'index.html') 
+
     return render(request, 'formDataUser.html')
+

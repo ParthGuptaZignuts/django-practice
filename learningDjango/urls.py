@@ -17,7 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from learningDjango.views import aboutUs, contactUs, course, home ,formPostMethod,oddOrEven,newsDetailsId,formDataUser
-
+from django.conf import settings
+from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),
@@ -29,3 +30,6 @@ urlpatterns = [
     path('newsDetails/<id>', newsDetailsId, name="newsDetailsId"),
     path('formDataUser',formDataUser, name="formDataUser")
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
